@@ -1,35 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { useAsync } from 'react-async';
 
 const API_KEY = "4dac21171a72bb216190c6db9bb2ddb2";
 const API_CITY = "479123";
 
-const data = {
-	city : '73',
-	temp : undefined,
-	wind : undefined	
-}
-
-const  getWeather = async () => {
-	const api_url = await fetch(`http://api.openweathermap.org/data/2.5/weather?id=${API_CITY}&appid=${API_KEY}`);
-	const api_data =  await api_url.json();
-	data.city = api_data.name;
-	data.temp = api_data.main.temp;
-	data.wind = api_data.wind.speed;
-	console.log(api_data);
+const  Getweather = async () => {
+	const api_url = await fetch(`http://api.openweathermap.org/data/2.5/weather?id=${API_CITY}&appid=${API_KEY}`);		
+	return await api_url.json();	
 };
 
 function App() {
+	const { data, error, isLoading } = useAsync({ promiseFn: Getweather })
+	console.log(data);	
+  if (isLoading) return "Загрузка..."
+  if (error) return `Ошибка: ${error.message}`
+  if (data)
   return (
     <div className="App">	
-		<div>
-		  <button onClick={getWeather}>Get json</button>
-		</div>		
+			<p>Город: {data.name}</p>
+			<p>Скорость ветра: {data.wind.speed}</p>
+			<p>Температура: {data.main.temp}</p>		
     </div>
   );
 }
-
-
-
 export default App;
