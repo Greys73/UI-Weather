@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import Paper from '@material-ui/core/Paper';
 import City from '../city';
+import Sky from '../sky';
 import Wind from '../wind';
 import Temperature from '../temperature';
 import './App.css';
-import Paper from '@material-ui/core/Paper';
 
 const API_KEY = '4dac21171a72bb216190c6db9bb2ddb2';
 const API_CITY = '479123';
@@ -23,21 +24,26 @@ function App() {
     getWeather();
   }, []);
   const { data, error, isLoading } = wdata;
-  
+
   if (isLoading) return 'Загрузка...';
   if (error) return `Ошибка: ${error.message}`;
   if (data) {
-    console.log(data)
+    // console.log(data)
     return (
-      <div className="App" alig>
-        <Paper className="Form" elevation={3}>                 
-          <p>
+      <div className="App">
+        <Paper className="Form" elevation={3}>
+          <div>
             <City value={data.name} />
-          </p>
-          <p>
-            <Wind speed={data.wind.speed}  deg={data.wind.deg}/>            
-          </p>
-          <Temperature value={data.main.temp} />
+          </div>
+          <div>
+            <Sky value={data.weather[0].description} />
+          </div>
+          <div>
+            <Wind speed={data.wind.speed} deg={data.wind.deg} />
+          </div>
+          <div>
+            <Temperature value={data.main.temp} />
+          </div>
         </Paper>
       </div>
     );
