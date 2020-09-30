@@ -28,7 +28,7 @@ function App() {
   if (isLoading) return 'Загрузка...';
   if (error) return `Ошибка: ${error.message}`;
   if (data) {
-    console.log(data);
+    // console.log(data);
     return (
       <div className="App">
         <Paper className="Form" elevation={3}>
