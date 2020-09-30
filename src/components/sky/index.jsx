@@ -20,6 +20,10 @@ function Sky({ value }) {
       url = 'https://www.metaweather.com/static/img/weather/ico/hc.ico';
       text = 'пасмурно';
       break;
+    case 'overcast clouds':
+      url = 'https://www.metaweather.com/static/img/weather/ico/hc.ico';
+      text = 'пасмурно';
+      break;
     case 'shower rain':
       url = 'https://www.metaweather.com/static/img/weather/ico/lr.ico';
       text = 'небольшой дождь';
